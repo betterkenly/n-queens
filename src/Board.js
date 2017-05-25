@@ -102,19 +102,26 @@
       var board = this.attributes;
 
       for (let i = 0; i < board.n; i++) {
-        var counter = 0;
-        var currentRow = board[i];
-        for (let j = 0; j < currentRow.length; j++) {
-          if (currentRow[j]) {
-            counter ++;
-          }
-          if (counter > 1) {
-            return true;
-          } 
-     
+        if (this.hasRowConflictAt(i)) {
+          return true;
         }
-      } 
+      }
       return false;
+
+      // for (let i = 0; i < board.n; i++) {
+      //   var counter = 0;
+      //   var currentRow = board[i];
+      //   for (let j = 0; j < currentRow.length; j++) {
+      //     if (currentRow[j]) {
+      //       counter ++;
+      //     }
+      //     if (counter > 1) {
+      //       return true;
+      //     } 
+     
+      //   }
+      // } 
+      // return false;
       
     },
 
@@ -142,11 +149,11 @@
         //for each column, implement hasColConflictAt
       var board = this.attributes;
       for (let i = 0; i < board.n; i++) {
-        console.log(this.hasColConflictAt(i));
         if (this.hasColConflictAt(i)) {
           return true;
         }
-      } return false;
+      } 
+      return false;
     },
 
 
