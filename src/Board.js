@@ -79,6 +79,7 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      var board = this.attributes;
       let counter = 0;
       for (let i = 0; i < board.n; i++) {
         if (board[rowIndex][i] === 1) {
