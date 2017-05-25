@@ -163,32 +163,73 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     //**input was originally: majorDiagonalColumnIndexAtFirstRow
-    hasMajorDiagonalConflictAt: function(n) {
+    hasMajorDiagonalConflictAt: function(num) {
       //
-      var x;
-      var y;
+      // var x;boar
+      // var y;
+      // var board = this.attributes;
+      // for (var i = 0; i < board.n; i++) {
+      //   var currentRow = board[i];
+      //   for (var j = n; j < board.n; j++) {
+      //     var current = currentRow[j];
+      //     if (current === undefined) {
+      //       continue;
+      //     }
+      //     if (current === 1) {
+      //       x = i;
+      //       y = j;
+      //     }
+      //   }
+      // }
+      // var search = function(x,y) {
+        
+      // }------------------------------>
+      // if n is -ve  --> board[n*-1][0];
+      // if n is +ve  --> board[0][n];
+      // board [+1][+1] === 1?????
+      // var counter = 0;
+      // while (board[index][n] !== undefined) {
+          // if value === 1; counter ++;
+            
+      //}
+        // return counter > 1;
       var board = this.attributes;
-      for (var i = 0; i < board.n; i++) {
-        var currentRow = board[i];
-        for (var j = n; j < board.n; j++) {
-          var current = currentRow[j];
-          if (current === undefined) {
-            continue;
+      var startingPoint;
+      var counter = 0;
+      var index = 0;
+      if (num < 0) {
+        num = num * -1;
+        while (num < board.n && index < board.n) {
+          startingPoint = board[num][index];
+          if (startingPoint === 1) {
+            counter++;
           }
-          if (current === 1) {
-            x = i;
-            y = j;
+          index++;
+          num++;
+        }
+      } else {
+        while (index < board.n && num < board.n) {
+          startingPoint = board[index][num];
+          if (startingPoint === 1) {
+            counter++;
           }
+          index++;
+          num++;
         }
       }
-      var search = function(x,y) {
         
-      }
+      return counter > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var board = this.attributes;
+      for (let i = board.n * -1; i < board.n; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      } 
+      return false;
     },
 
 
@@ -198,12 +239,42 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var board = this.attributes;
+      var colIndex = minorDiagonalColumnIndexAtFirstRow;
+      // if colindex > board.n - 1 ; 
+        // rowindex = colindex - (board.n - 1);
+        // colindex = board.n - 1;
+        // startingpoint = board[rowindex][colindex];
+      //else   (rowindex = 0)
+        // startingpoint = board[rowindex][colindex];
+      
+      //for ( i =0 ; i < board.n) <--- 4 times;
+          // if rowindex < colindex
+        // if ( )
+      var rowIndex = 0;
+      var counter = 0;
+      if (colIndex > board.n - 1) {
+        rowIndex = colIndex - (board.n - 1);
+        colIndex = board.n - 1;
+      }
+      for (rowIndex; rowIndex < board.n; rowIndex++) {
+        if (board[rowIndex][colIndex] === 1) {
+          counter++;
+        }
+        colIndex--;
+      }
+      return counter > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var board = this.attributes;
+      for (var i = 1; i < (board.n - 1) * 2; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      } 
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
